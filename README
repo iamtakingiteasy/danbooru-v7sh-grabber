@@ -1,0 +1,83 @@
+Instalation instructions
+
+First, download most recent stable version 
+GNU/Linux, Solaris, BSD
+Make sure that you have all of core binaries/builtins ([ printf cat grep sed od dd awk) and one of downloaders (wget curl axel fetch). 
+(Optional, only if you planing to use your danbooru account to download files) Make sure that one of hashers (digest sha1 sha1sum) installed. 
+Run script with sh grab.sh 
+Windows
+Install cygwin 
+While installing make sure you selected wget package. 
+Run script in cygwin environment with sh grab.sh 
+Modes
+
+There are two basic modes in which script works: 'search' and 'download' 
+Search Mode
+
+Search mode activated by default. In search mode you search for specified tags 
+$ sh grab.sh 'cirn*'                                                
+    [Notice] Downloader found: fetch                                                
+                 Type      Count Name                                               
+            character       8396 cirno                                              
+              general         58 cirno-nee                                          
+              general         55 cirno_(cosplay)                                    
+    [Notice] Cleaning up...done  
+
+$ sh grab.sh 'loli'                                                 
+    [Notice] Downloader found: fetch                                                
+                 Type      Count Name                                               
+              general      16052 loli                                               
+    [Notice] Cleaning up...done                                                     
+$ sh grab.sh 'cirno-nee loli'                                       
+    [Notice] Downloader found: fetch                                                
+                 Type      Count Name                                               
+                mixed          1 cirno-nee loli                                     
+    [Notice] Cleaning up...done
+Download Mode
+
+Download mode activated by option '-d'. In download mode you actually downloading files. 
+$ sh grab.sh 'cirno-nee loli' -d                                    
+    [Notice] Downloader found: fetch                                                
+    Starting grabbing for tags 'cirno-nee loli'                                     
+      Switching to page 1 of 1                                                      
+        Downloading file d631b6cb19abcd20ff994d6375b4e140.png (1/1)...done          
+    End grabbing for tags 'cirno-nee loli'                                          
+    [Notice] Cleaning up...done    
+Basic usage
+
+Grab for posts with tag 'tag1': 
+$ sh grab.sh [OPTIONS] 'tag1' -d
+
+Grab for posts with both 'tag1' and 'tag2': 
+$ sh grab.sh [OPTIONS] 'tag1 tag2'
+
+Grab for posts with 'tag1', then for posts with 'tag2': 
+$ sh grab.sh [OPTIONS] 'tag1, tag2'
+
+Search for tags, including substring 'tagname': 
+$ sh grab.sh tagname
+
+Search for tags starting with 'tag': 
+$ sh grab.sh 'tag*'
+
+Download all content, tagged with 'tag1' AND 'tag2': 
+$ sh grab.sh 'tag1 tag2' -d
+
+Download all content, tagged with 'tag1' OR 'tag2': 
+$ sh grab.sh '~tag1 ~tag2' -d
+
+Download all content, tagged with 'tag1' AND 'tag2', then download all content tagged with 'tag3' OR 'tag4': 
+$ sh grab.sh 'tag1 tag2, ~tag3 ~tag4' -d
+
+Download all content with (cirno OR reimu) AND with width > 1000 pixels: 
+$ sh grab.sh 'width:>1000 ~hakurei_reimu ~cirno' -d
+
+To grab from gelbooru, just add option -e gelbooru option: 
+$ sh grab.sh 'width:>1000 ~hakurei_reimu ~cirno' -d -e gelbooru
+More about tags
+
+http://danbooru.donmai.us/help/cheatsheet 
+More about options
+
+$ sh grab.sh --help
+
